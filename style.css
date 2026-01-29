@@ -1,0 +1,421 @@
+/* ========================
+   RESET AND BASE STYLES
+   ======================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg-cream: #fdfbf7;
+    --bg-paper: #ffffff;
+    --ink-color: #3e2723;
+    --ink-light: #5d4037;
+    --pastel-pink: #ffcbbd;
+    --pastel-green: #d0f0c0;
+    --pastel-blue: #cae9f5;
+    --pastel-black: #d7ccc8;
+    --border-thickness: 2px;
+    --shadow-hard: 4px 4px 0px var(--ink-color);
+    --shadow-hover: 2px 2px 0px var(--ink-color);
+    --radius-rough: 4px;
+    --radius-round: 50px;
+}
+
+body {
+    font-family: 'Courier New', Courier, 'Inter', serif;
+    background-color: var(--bg-cream);
+    background-image: radial-gradient(#5d4037 0.5px, transparent 0.5px), radial-gradient(#5d4037 0.5px, var(--bg-cream) 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    min-height: 100vh;
+    color: var(--ink-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ========================
+   NAVBAR
+   ======================== */
+.toolbox-cont {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    height: 90px; 
+    background: var(--bg-paper);
+    border-bottom: var(--border-thickness) solid var(--ink-color);
+    box-shadow: 0 4px 10px rgba(62, 39, 35, 0.05);
+    padding: 0 3rem;
+     position: sticky; 
+     top: 0; z-index: 100;
+}
+
+.brand-title {
+    font-size: 1.8rem; 
+    font-weight: 900; 
+    color: var(--ink-color);
+    text-transform: uppercase; 
+    letter-spacing: -1px;
+}
+
+.toolbox-priority-cont {
+    display: flex; 
+    align-items: center; 
+    gap: 1.5rem;
+    background: var(--bg-cream); 
+    padding: 0.5rem 1.5rem;
+    border: var(--border-thickness) solid var(--ink-color);
+    border-radius: var(--radius-round);
+}
+
+.filter-label { 
+    font-size: 0.9rem; 
+    font-weight: 700; 
+    color: var(--ink-light); 
+}
+.color-filters { 
+    display: flex; 
+    gap: 1rem; 
+}
+
+.color {
+    height: 30px; 
+    width: 30px; 
+    border-radius: 50%;
+    cursor: pointer; 
+    border: var(--border-thickness) solid var(--ink-color);
+    position: relative;
+}
+
+.color::after {
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 900; 
+    font-size: 0.9rem;
+    color: var(--ink-color); 
+    pointer-events: none;
+}
+.color.lightpink::after { content: "H"; }
+.color.lightgreen::after { content: "M"; }
+.color.lightblue::after { content: "L"; }
+.color.black::after { content: "C"; }
+
+.lightpink { background-color: var(--pastel-pink); }
+.lightgreen { background-color: var(--pastel-green); }
+.lightblue { background-color: var(--pastel-blue); }
+.black { background-color: var(--pastel-black); }
+
+.action-btn-cont { display: flex; 
+    gap: 1rem; 
+}
+
+.add-btn, .remove-btn, .calendar-toggle-btn {
+    display: flex; 
+    align-items: center; 
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem; 
+    border-radius: var(--radius-rough);
+    cursor: pointer; 
+    font-weight: 700;
+    border: var(--border-thickness) solid var(--ink-color);
+    box-shadow: var(--shadow-hard); 
+    text-transform: uppercase;
+    font-size: 0.8rem; 
+    color: var(--ink-color); 
+    background: white;
+}
+
+.add-btn { 
+    background-color: var(--pastel-green); 
+}
+.remove-btn { 
+    background-color: var(--pastel-pink); 
+}
+.calendar-toggle-btn { 
+    background-color: var(--pastel-blue); 
+}
+
+.add-btn:hover, .remove-btn:hover, .calendar-toggle-btn:hover {
+    transform: translate(2px, 2px); box-shadow: var(--shadow-hover);
+}
+
+/* ========================
+   MAIN BOARD & TICKETS
+   ======================== */
+.main-cont {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem; 
+    padding: 4rem; 
+    max-width: 1400px; 
+    margin: 0 auto;
+}
+
+.ticket-cont {
+    background: var(--bg-paper);
+    border: var(--border-thickness) solid var(--ink-color);
+    border-radius: 2px; box-shadow: var(--shadow-hard);
+    transition: all 0.3s ease; position: relative;
+    display: flex; flex-direction: column; min-height: 200px;
+}
+
+.ticket-cont:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 10px 10px 0px var(--ink-color); z-index: 10;
+}
+
+.ticket-color { 
+    height: 15px; 
+    width: 100%; 
+    border-bottom: var(--border-thickness) solid var(--ink-color); 
+    cursor: pointer; }
+.ticket-id { 
+    padding: 1rem 1.5rem 0.2rem; 
+    font-size: 0.7rem; 
+    font-weight: 900; 
+    color: var(--ink-light);
+}
+
+.task-area {
+    padding: 0.5rem 1.5rem 2rem; 
+    font-size: 1.1rem; 
+    line-height: 1.5;
+    border: none; 
+    outline: none; 
+    background: transparent; 
+    resize: none;
+    font-family: 'Courier New', Courier, monospace; 
+    width: 100%; 
+    height: 100%;
+}
+
+.ticket-lock {
+    position: absolute; 
+    bottom: 1rem; 
+    right: 1rem;
+    font-size: 1rem; 
+    cursor: pointer; 
+    padding: 0.5rem;
+}
+
+.ticket-done-btn {
+    position: absolute; 
+    top: 10px; 
+    right: 10px;
+    background: var(--pastel-green);
+    border: var(--border-thickness) solid var(--ink-color);
+    padding: 4px 10px; 
+    font-size: 0.75rem; 
+    font-weight: 800;
+    cursor: pointer; 
+    box-shadow: var(--shadow-hard); 
+    z-index: 20;
+}
+.ticket-done-btn:hover { 
+    transform: translate(2px, 2px); 
+    box-shadow: var(--shadow-hover); 
+}
+
+/* Completed Task State (Visually Faded) */
+.ticket-cont.completed-task {
+    opacity: 0.5; /* Faded Look */
+    filter: grayscale(100%);
+    border-style: dashed;
+    pointer-events: none; /* Prevent clicking when in history */
+}
+.ticket-cont.completed-task .task-area { 
+    text-decoration: line-through; 
+}
+
+/* Animation */
+@keyframes slideUpFade { from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+} 
+to { 
+    opacity: 1; 
+    transform: translateY(0); 
+} }
+.ticket-cont { 
+    animation: slideUpFade 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+/* ========================
+   SIDEBAR CALENDAR
+   ======================== */
+.calendar-sidebar {
+    position: fixed; 
+    top: 0; 
+    right: -450px; 
+    width: 400px; 
+    height: 100vh;
+    background: var(--bg-paper); 
+    border-left: var(--border-thickness) solid var(--ink-color);
+    box-shadow: -10px 0 20px rgba(62, 39, 35, 0.15); 
+    z-index: 200;
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; 
+    flex-direction: column; 
+    padding: 2rem;
+}
+.calendar-sidebar.open { 
+    right: 0; 
+
+}
+.sidebar-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background: rgba(62, 39, 35, 0.4); 
+    backdrop-filter: blur(2px);
+    z-index: 199; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s;
+}
+.sidebar-overlay.open { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.cal-header {
+    display: flex; 
+    justify-content: 
+    space-between; 
+    align-items: center;
+    margin-bottom: 1.5rem; 
+    border-bottom: 2px dashed var(--ink-color); 
+    padding-bottom: 1rem;
+}
+.cal-header h2 { 
+    font-size: 1.3rem; 
+    text-transform: uppercase; 
+    font-weight: 900; 
+}
+.cal-header i { 
+    cursor: pointer; 
+    padding: 0.5rem; 
+    transition: 0.2s; 
+    border-radius: 50%;
+ }
+.cal-header i:hover { 
+    background: var(--pastel-black);
+ }
+
+.calendar-grid-header, .calendar-grid {
+    display: grid;
+     grid-template-columns: 
+     repeat(7, 1fr); 
+     text-align: center;
+      gap: 0.5rem;
+}
+.calendar-grid-header { 
+    font-weight: 900; 
+    margin-bottom: 0.5rem; 
+}
+
+.cal-day {
+    aspect-ratio: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border: 1px solid var(--ink-light); 
+    cursor: pointer; 
+    font-weight: 600;
+    border-radius: 4px; 
+    position: relative;
+}
+.cal-day:hover { 
+    background-color: var(--bg-cream); 
+    border: 2px solid var(--ink-color); 
+}
+.cal-day.active-date {
+    background-color: var(--ink-color); 
+    color: white;
+    transform: scale(1.1); 
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+}
+.cal-day.has-task::after {
+    content: ''; 
+    position: absolute; 
+    bottom: 4px; 
+    width: 6px; 
+    height: 6px;
+    background-color: #ff5252; 
+    border-radius: 50%;
+}
+
+.close-sidebar { 
+    border: none; 
+    background: none; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+    align-self: flex-end; 
+    margin-bottom: 1rem; 
+}
+#show-all-btn { 
+    width: 100%; 
+    padding: 0.8rem; 
+    background: var(--bg-cream); 
+    border: 2px solid var(--ink-color); 
+    font-weight: bold; 
+    cursor: pointer; 
+    margin-bottom: 1rem; 
+}
+
+/* ========================
+   MODAL
+   ======================== */
+.modal-cont {
+    display: none; 
+    flex-direction: column;
+    position: fixed; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 90%; max-width: 500px;
+    background: var(--bg-paper); 
+    border: var(--border-thickness) solid var(--ink-color);
+    box-shadow: 15px 15px 0px rgba(62, 39, 35, 0.4); 
+    z-index: 300;
+}
+.modal-header { 
+    padding: 1.5rem; 
+    background: var(--bg-cream); 
+    border-bottom: 2px dashed var(--ink-color); 
+    text-align: center; 
+}
+.textArea-cont {
+    width: 100%; 
+    min-height: 150px; 
+    padding: 1.5rem;
+    border: none; 
+    outline: none; 
+    font-size: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    background-image: linear-gradient(transparent 95%, #d0d0d0 95%);
+    background-size: 100% 2rem; 
+    background-attachment: local; line-height: 2rem;
+}
+.priority-colors-container { 
+    padding: 1.5rem; 
+    background: var(--bg-cream); 
+    border-top: var(--border-thickness) solid var(--ink-color); }
+.priority-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 1rem; margin-top: 1rem; }
+
+.priority-color {
+    height: 40px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border: var(--border-thickness) solid var(--ink-color); 
+    cursor: pointer; font-weight: 900;
+}
+.priority-color.active { 
+    transform: translate(2px, 2px); 
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+ }
